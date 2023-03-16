@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  {% include 'navbar.html'%}
+<div style="justify-content: space-around;padding: 20px;display: flex; flex-direction: row; flex-wrap: wrap;gap:25px ">
+   <!-- <div>
+    <canvas id="myChart" width="400" height="400"></canvas>
+    <h3 style="text-align: center;"><b>Title: Credit & Debit Transactions</b></h3>  </div>
+    -->
+    <div>{% if chart %}
+        <img src="data:image/png;base64,{{chart|safe}}">
+        
+        {% endif %}</div>
+        <!-- <div>{% if chart1 %}
+            <img src="data:image/png;base64,{{chart|safe}}">
+            
+            {% endif %}</div> -->
+    <!-- <div>    <canvas id="myChart1" width="400" height="400"></canvas>
+    <h3 style="text-align: center;"><b>Title: Credits Vs Debits</b></h3> 
+   </div>
+   <div>
+    <canvas id="myChart2" width="400" height="400"></canvas>
+    <h3 style="text-align: center;"><b>Title: Credit Vs Category</b></h3> 
+   </div>
+   <div>
+    <canvas id="myChart3" width="400" height="400"></canvas>
+    <h3 style="text-align: center;"><b>Title: Debit  Vs Category</b></h3></div>  -->
+</div>
+</body> 
+</html>

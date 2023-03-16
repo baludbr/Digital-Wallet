@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .styled-table {
+    width:75%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px black;
+    }
+    .styled-table thead tr {
+    background-color: black;
+    color: #ffffff;
+    text-align: left;
+    }
+    .styled-table th,
+    .styled-table td {
+    padding: 15px 5px;
+    }
+    .styled-table tbody tr {
+    border-bottom: 1px solid black;
+    }
+
+    .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+    }
+
+    .styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid black;
+    }
+    .styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+    }
+    tr:nth-child(even) {
+          background-color: #ececec;
+        }
+
+.btn1 {
+   background-color: #90EE90;
+  border: 0;
+  padding: 5px;
+  height: 50%;
+  width: 50%;
+}
+.btn2{
+  background-color: #FFCCCB;
+  border: 0;
+  padding: 5px;
+  height: 60%;
+  width: 60%;
+}
+</style>
+</head>
+<body>
+    {% include 'navbar.html'%}
+    <center>
+    <table class="styled-table">
+        <thead>
+        <tr>
+          <th>Query</th>
+          <th>Problem</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in x1%}
+        <tr>
+          <td>{{i.query}}</td>
+          <td>{{i.problem}}</td>
+          <td><button class="btn1" href="edit/{{i.id}}">Edit</button></td>
+          <td><button class="btn2" href="delete/{{i.id}}">Delete</button></td>
+        </tr>
+         {% endfor %}
+        </tbody>
+    </table>
+    </center>
+</body>
+</html>

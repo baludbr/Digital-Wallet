@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Add your CSS code here */
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        input[type="text"], input[type="integer"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        }
+
+        input[type="text"]:focus, input[type="integer"]:focus {
+            outline: none;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.4);
+        }
+
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    {%include "navbar.html" %}
+    <form method="POST" action="insertid/" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <input type="text" placeholder="id" name="id1" value={{x1.id}} readonly>
+        <br/>
+        <input type="text" placeholder="category" name="category">
+        <br/>
+        <input type="integer" placeholder="credit" name="credit_amount">
+        <br/>
+        <input type="integer" placeholder="debit" name="debit_amount">
+        <br/>
+        <input type="integer" placeholder="balance" name="balance" value={{x1.balance}} readonly>
+        <br/>
+        <input type="submit" value="Insert!!">
+    </form>
+
+    <script>
+        function validateForm() {
+            // Get the values of the input fields
+            var category = document.getElementsByName("category")[0].value;
+            var credit = document.getElementsByName("credit_amount")[0].value;
+            var debit = document.getElementsByName("debit_amount")[0].value;
+
+            // Validate that all fields are filled out
+            if (category === "" || credit === "" || debit === "") {
+                alert("Please fill out all fields.");
+                return false;
+            }
+
+            // Validate that credit and debit are positive integers
+            if (!Number.isInteger(parseInt(credit)) || !Number.isInteger(parseInt(debit))) {
+                alert("Credit and debit must be positive integers.");
+                return false;
+            }
+
+            // Validation passed, allow form to submit
+            return true;
+        }
+    </script>
+</body>
+</html>

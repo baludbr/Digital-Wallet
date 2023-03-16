@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<style>
+    #outer{
+    text-align:center;
+    }
+    #o2{
+    text-align:center;
+    }
+    .inner {
+            display: inline-block;
+    }
+</style>
+<body>
+{%include "navbar.html"%}
+<div id="outer">
+<div class="inner"><canvas id="myChart1" style="width:100%;max-width:600px"></canvas></div>
+<div class="inner"><canvas id="myChart2" style="width:100%;max-width:600px"></canvas></div>
+</div>
+<div id="o2" style="margin-top:50px;">
+<div class="inner"><canvas id="myChart4" style="width:100%;max-width:600px"></canvas></div>
+    <div class="inner"><canvas id="myChart3" style="width:100%;max-width:600px"></canvas></div>
+
+</div>
+
+<script>
+var xValues = ["Loans", "Insurance", "Savings", "Spendings", "BillDues"];
+var yValues = [55, 49, 44, 24, 15];
+var barColors = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797",
+  "#e8c3b9",
+  "#1e7145"
+];
+var x1Values = [50,60,70,80,90,100,110,120,130,140,150];
+var y1Values = [7,8,8,9,9,9,10,11,14,14,15];
+new Chart("myChart1", {
+  type: "line",
+  data: {
+    labels: x1Values,
+    datasets: [{
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "rgba(0,0,255,1.0)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: y1Values
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+      yAxes: [{ticks: {min: 6, max:16}}],
+    },
+     title: {
+      display: true,
+      text: "Transaction and Credits"
+    }
+  }
+});
+new Chart("myChart2", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Transactions Analysis"
+    }
+  }
+});
+var x3Values = ["Fashion", "Food", "Education", "Insurance", "Others"];
+var y3Values = [55, 49, 44, 24, 15];
+var barColors3 = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797",
+  "#e8c3b9",
+  "#1e7145"
+];
+
+new Chart("myChart3", {
+  type: "doughnut",
+  data: {
+    labels: x3Values,
+    datasets: [{
+      backgroundColor: barColors3,
+      data: y3Values
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Credits Vs Debits"
+    }
+  }
+});
+var x4Values = ["January", "Febraury", "March", "April", "May"];
+var y4Values = [55, 49, 44, 24, 15];
+var barColors = ["red", "green","blue","orange","brown"];
+
+new Chart("myChart4", {
+  type: "bar",
+  data: {
+    labels: x4Values,
+    datasets: [{
+      backgroundColor: barColors,
+      data: y4Values
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Month wise savings"
+    }
+  }
+});
+</script>
+</body>
+</html>

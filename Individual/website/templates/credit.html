@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      .card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+}
+.card{
+width:500px;
+border-style: solid;
+margin-left:20px;
+padding: 2px 16px;
+margin-bottom:30px
+}
+.score{
+margin-top: 20px;
+margin-bottom: 20px;
+}
+    </style>
+</head>
+<body>
+{%include "navbar.html"%}
+<center>
+  <div class="score">
+<h2>&nbsp &nbsp &nbsp<b>Your Credit Score</b>: <i>120</i></h2>
+    </div>
+<div class="card">
+    <div class="card-horizontal">
+        <div class="img-square-wrapper">
+            <img class="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Gold_coin_icon.png/800px-Gold_coin_icon.png"  alt="Card image cap" style="height:100px;width=100px">
+        </div>
+        <div class="card-body" style="margin-left:20px">
+            <h4 class="card-title">Mission</h4>
+            <p class="card-text">Transaction: Credited Succesfully</p>
+        </div>
+    </div>
+    <div class="card-footer" style="margin-left:25px">
+        <p class="card-text">+70 score </p>
+    </div>
+</div>
+<div class="card" style="margin-left:20px; padding: 2px 16px;">
+    <div class="card-horizontal">
+        <div class="img-square-wrapper">
+            <img class="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Gold_coin_icon.png/800px-Gold_coin_icon.png"  alt="Card image cap" style="height:100px;width=100px">
+        </div>
+        <div class="card-body" style="margin-left:20px">
+            <h4 class="card-title">Mission</h4>
+            <p class="card-text">Transaction :Credited Succesfully</p>
+        </div>
+    </div>
+    <div class="card-footer" style="margin-left:25px">
+        <p class="card-text">+100 score </p>
+    </div>
+</div>
+<div class="card" style="margin-left:20px; padding: 2px 16px;">
+    <div class="card-horizontal">
+        <div class="img-square-wrapper">
+            <img class="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Gold_coin_icon.png/800px-Gold_coin_icon.png"  alt="Card image cap" style="height:100px;width=100px">
+        </div>
+        <div class="card-body" style="margin-left:20px">
+            <h4 class="card-title">Mission</h4>
+            <p class="card-text">Transaction :Debited Succesfully</p>
+        </div>
+    </div>
+    <div class="card-footer" style="margin-left:25px">
+        <p class="card-text">-50 score </p>
+    </div>
+</div>
+</center>
+</body>
+
+</html>

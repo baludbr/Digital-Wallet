@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <title> Your Bank </title>
+    <style>
+        * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+header {
+  width: 100%;
+  min-height: 60px;
+  background-color: rgb(23, 33, 29);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav {
+  width: 90%;
+  max-width: 1000px;
+  height: 7vh;
+  min-height: 60px;
+  padding-top: 8px;
+  background-color: inherit;
+  color: rgba(255, 255, 255);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+}
+
+nav .logo {
+  font-size: 30px;
+  letter-spacing:3px;
+}
+
+.navList {
+  font-size: 15px;
+  text-transform: uppercase;
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.navBtn {
+  display: none;
+  cursor: pointer;
+}
+
+.navBtn div {
+  width: 30px;
+  height: 2px;
+  margin: 5px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 2px;
+  transition: all 0.5s ease-in;
+}
+@media screen and (max-width: 768px) {
+
+  nav {
+    padding: 0;
+    align-items: center;
+  }
+
+  .navList {
+    position: absolute;
+    right: 0px;
+    height: 93vh;
+    top: clamp(60px, 7vh, 7vh);
+    flex-direction: column;
+    gap: 5vh;
+    align-items: center;
+    padding: 5vh 15vw;
+    background-color: rgb(70, 88, 72, 0.8);
+    font-size: 26px;
+    letter-spacing: 1px;
+    backdrop-filter: blur(5px);
+    transform: translate(100%);
+    transition: transform 0.5s ease-out;
+  }
+
+  .navLi {
+    opacity: 0;
+  }
+  .navBtn {
+    display: block;
+  }
+}
+
+.navActive {
+  transform: translate(0%);
+}
+@keyframes SlideIn {
+  from {
+    opacity: 0;
+    transform: translate(250px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+.navBtnToggle .line1 {
+  transform: rotate(-45deg) translate(-4px, 6px);
+}
+
+.navBtnToggle .line2 {
+  transform: scale(0) translate(10px, 0);
+}
+
+.navBtnToggle .line3 {
+  transform: rotate(45deg) translate(-4px, -6px);
+}
+    </style>
+    <script>
+        const navList = document.querySelector('.navList')
+const navBtn = document.querySelector('.navBtn')
+const navLinks = document.querySelectorAll('.navLi')
+
+
+navBtn.addEventListener('click', () => {
+  navBtn.classList.toggle('navBtnToggle')
+  navList.classList.toggle('navActive')
+  navLinks.forEach((item, index) => {
+    const delay = index / 10 + 0.05
+    if (item.style.animation)
+      item.style.animation = ''
+    else
+      item.style.animation = SlideIn 0.5s forwards ${delay}s
+  })
+})
+    </script>
+</head>
+
+<body>
+<header>
+  <nav>
+    <!-- nav Logo -->
+    <div class="logo">Digital Wallet</div>
+    <!-- nav List -->
+    {% if x2.role == "admin" %}
+    <ul class="navList">
+      <li class="navLi"><a href="/users1/">Users</a></li>
+      <li class="navLi"><a href="/trans/">Transactions</a></li>
+      <li class="navLi"><a href="/query1/">Query</a></li>
+      <li class="navLi"><a href="/logout">Sign Out</a></li>
+    </ul>
+    {%endif%}
+    {% if x2.role != "admin" %}
+    <ul class="navList">
+      <li class="navLi"><a href="/homepage/">Home</a></li>
+      <li class="navLi"><a href="/insert/">Insert</a></li>
+      <li class="navLi"><a href="/transaction/">Transaction</a></li>
+      <li class="navLi"><a href="/credit/">Credit Score</a></li>
+      <li class="navLi"><a href="/finance/">Finances</a></li>
+      <li class="navLi"><a href="/passbook/">Passbook</a></li>
+      <li class="navLi"><a href="/query/">Query</a></li>
+      <li class="navLi"><a href="/logout">Sign Out</a></li>
+      <li class="navLi"><a href="/profile">Profile</a></li>
+    </ul>
+    {%endif%}
+    <!-- nav Button -->
+    <div class="navBtn ">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+  </nav>
+</header>
+</body>
+
+</html>

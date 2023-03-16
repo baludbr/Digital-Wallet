@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div id="content">
+ <style> 
+  table,td,td{
+    border: 1px solid black;
+  }
+  .input {
+	margin: 8%;
+	width: 25%;
+	padding: 15px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: none;
+	outline: none;
+	color:black;
+    border-radius: 1px;
+	background-color: #fff;
+	border-bottom: 1px solid rgb(5, 5, 5);
+    opacity:.8;
+}
+  </style>
+</head>
+<body>
+    {% include "Navbar.html" %}
+    <center>
+    <i class="fa fa-search" aria-hidden="true"></i>
+<input class="input" id="myInput" type="text" placeholder="Search Your Transaction">
+
+<div class="creditscore" 
+style="width: fit-content;
+box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+float: right; 
+background-color:#43425D; 
+border-radius:15px;
+color:white;">
+
+<h4> &nbsp;&nbsp;Balance:- &nbsp;<i class='fas fa-dollar-sign' style='font-size:18px;color: lightgreen;' ></i>
+    {{yy}}&nbsp;&nbsp;</h4></div>
+    <br>
+<table style="width: 60%; border-collapse: collapse; font-family:montserrat;" >
+        <tr style="background-color: #ccc;">
+            <th>Transaction Category</th>
+            <th>Credit Amount</th>
+            <th>Debit Amount</th>
+            <th>Previous Balance</th>
+            <th>Update Transaction</th>
+            <th>Delete Transaction</th>
+        </tr>
+        <tbody id="myTable">
+            {%for i in all.values%}
+              <tr>
+              <td>{{i.category}}</td>
+              <td>{{i.credit_amount}}</td>
+              <td>{{i.debit_amount}}</td>
+              <td>{{i.balance}}</td>
+              <td style="text-align: center;"><a href="/"><i class="fas fa-edit">Update</i></a></td>
+              <td style="text-align: center;"><a href="/"><i class="fas fa-trash-alt">delete</i></a></td>
+              </tr>
+          {%endfor%}
+</tbody>
+</table>
+<h6>Total Credited Amount:</h6>{{t_c}}
+<br/>
+<h6>Total Debited Amount:</h6>{{t_d}}
+</div>
+<br>
+<span style="text-align:center; padding-left:42%;">
+<button class="combutton" onclick="printDiv('content')">Print <i class="fa fa-print" aria-hidden="true"></i></button>
+</span>
+<script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  function printDiv(content) {
+       var printContents = document.getElementById(content).innerHTML;
+       var originalContents = document.body.innerHTML;
+  
+       document.body.innerHTML = printContents;
+  
+       window.print();
+  
+       document.body.innerHTML = originalContents;
+  }
+  </script>
+</center>
+</body>
+</html>

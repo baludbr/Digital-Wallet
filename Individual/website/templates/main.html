@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js" integrity="sha512-BdHyGtczsUoFcEma+MfXc71KJLv/cd+sUsUaYYf2mXpfG/PtBjNXsPo78+rxWjscxUYN2Qr2+DbeGGiJx81ifg==" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance</title>
+</head>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color :rgb(23, 33, 29);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+button {
+  padding: 0.7rem;
+  background-color: #2196f3;
+  border: 1px solid #b0bec5;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1.2rem;
+}
+.text{
+  color: white;
+    border-right: 2px solid blue;
+    font-size: 50px;
+    font-family: sans-serif;
+    color: white;
+}
+.contain{
+display:inline-block;
+}
+
+.login_btn{
+    z-index: 4;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+   
+}
+
+button a{
+    text-decoration: none;
+    color: #fff;
+}
+
+</style>
+<body>
+<div class="contain">
+    <div class="text"></div>
+</div>
+</body>
+<div>
+<script>
+   var typing=new Typed(".text", {
+       strings: ["", "Welcome To "," Money Management Website","We are here to help you"],
+       typeSpeed: 100,
+       backSpeed: 40,
+       loop: true,
+   });
+</script>
+</div>
+<br/>
+<br/>
+<div class="login_btn">
+    <Button><a href="/login">Login</a></Button>
+    &nbsp;
+    <Button><a href="/register">Register</a></Button>
+    {{ redirect_to_login_immediately }}
+</div>
+</html>
