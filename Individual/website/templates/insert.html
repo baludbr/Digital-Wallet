@@ -21,7 +21,7 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
 
-        input[type="text"], input[type="integer"] {
+        input[type="text"], input[type="integer"],select {
             display: block;
             width: 100%;
             padding: 10px;
@@ -31,7 +31,7 @@
             box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
         }
 
-        input[type="text"]:focus, input[type="integer"]:focus {
+        input[type="text"]:focus, input[type="integer"],select:focus {
             outline: none;
             box-shadow: inset 0 0 5px rgba(0,0,0,0.4);
         }
@@ -58,11 +58,24 @@
         {% csrf_token %}
         <input type="text" placeholder="id" name="id1" value={{x1.id}} readonly>
         <br/>
-        <input type="text" placeholder="category" name="category">
-        <br/>
-        <input type="integer" placeholder="credit" name="credit_amount">
+        <!-- <input type="text" placeholder="category" name="category">
+        <br/> -->
+        <!-- <input type="integer" placeholder="credit" name="credit_amount">
         <br/>
         <input type="integer" placeholder="debit" name="debit_amount">
+        <br/> -->
+        <select name="category">
+            <option value="food">Food</option>
+            <option value="fashion">fashion</option>
+            <option value="parties">parties</option>
+          </select>
+          <br/>
+          <select name="type_amount">
+            <option value="credit">Credit</option>
+            <option value="debit">Debit</option>
+          </select>
+          <br/>
+          <input type="integer" placeholder="amount" name="amount">
         <br/>
         <input type="integer" placeholder="balance" name="balance" value={{x1.balance}} readonly>
         <br/>

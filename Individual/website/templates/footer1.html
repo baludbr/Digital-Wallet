@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="./social-media-icons.css">
+    <script src="https://kit.fontawesome.com/66aa7c98b3.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.foot a {
+  text-decoration: none;
+}
+
+.foot {
+  color: #fff;
+  width: 100%;
+  background-color: rgb(23, 33, 29);
+  bottom: 0;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  position:absolute;
+  bottom:0;
+}
+.foot .row {
+  display: flex;
+  padding: 1rem;
+}
+
+.foot .column {
+  width: calc(100% / 3);
+  padding: 0 0.9375rem;
+}
+
+.foot h4 {
+  margin-bottom: 0.9375rem;
+  font-size: 1.5rem;
+}
+
+.foot p {
+  font-size: 1rem;
+  line-height: 1.3rem;
+}
+
+.foot ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.foot ul li {
+  margin-bottom: 0.625rem;
+}
+
+.foot ul li a {
+  color: #fff;
+  font-size: 1rem;
+}
+
+.foot ul li i {
+  color: #6faaff;
+}
+
+.foot ul li a:hover {
+  color: #6faaff;
+}
+.copyright {
+  text-align: center;
+  color: #fff;
+  background-color: rgb(23, 33, 29);
+  padding: 0.6rem 0;
+}
+
+/* Responsive adjustments */
+
+@media screen and (max-width: 768px) {
+  .column {
+    margin: 0.4rem 0;
+    width: 100%;
+    padding: 0;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .foot h4 {
+    font-size: 1.3125rem;
+  }
+
+  .foot p {
+    font-size: 0.9375rem;
+  }
+
+  .foot ul li a {
+    font-size: 0.9375rem;
+  }
+
+  ul.social-icons li a {
+    width: 1.875rem;
+    height: 1.875rem;
+  }
+}
+.social-icons{
+  background-color:#00506b;
+  text-align: center;
+}
+.social-icons a{
+  color:#fff;
+  line-height:30px;
+  font-size:30px;
+  margin: 0 5px;
+  text-decoration:none;
+
+}
+
+.social-menu ul{
+    top: 50%;
+    padding: 0;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    display: flex;
+}
+
+.social-menu ul li{
+    list-style: none;
+    margin: 0 15px;
+}
+
+.social-menu ul li .fab{
+    font-size: 30px;
+    line-height: 60px;
+    transition: .3s;
+    color: #000;
+}
+
+.social-menu ul li .fab:hover{
+    color: #fff;
+}
+
+.social-menu ul li a{
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #fff;
+    text-align: center;
+    transition: .6s;
+    box-shadow: 0 5px 4px rgba(0,0,0,.5);
+}
+
+.social-menu ul li a:hover{
+    transform: translate(0, -10%);
+}
+
+.social-menu ul li:nth-child(1) a:hover{
+    background-color: rgba(0, 0, 0, 0.829);
+}
+.social-menu ul li:nth-child(2) a:hover{
+    background-color: #E4405F;
+}
+.social-menu ul li:nth-child(3) a:hover{
+    background-color: #0077b5;
+}
+
+  </style>
+</head>
+<body>
+  <div class="foot">
+
+    <div class="row">
+
+      <div class="column">
+
+        <h4>About Us</h4>
+
+        <p>
+          Learn Money Management techniques designed for people like you.
+          Tired of managing your savings?Let us do it for you.
+        </p>
+      </div>
+
+      <div class="column">
+
+        <h4>Quick Links</h4>
+
+        <ul>
+
+          <li><a href="#"><i class="fa fa-angle-right"></i> Subscription</a></li>
+
+          <li><a href="#"><i class="fa fa-angle-right"></i> Contact us</a></li>
+
+          <li><a href="#"><i class="fa fa-angle-right"></i> Bug report</a></li>
+
+        </ul>
+
+      </div>
+
+      <div class="column">
+
+        <h4>Connect with Us</h4>
+
+       <div class="social-menu">
+        <ul>
+            <li><a href="https://github.com/sanketbodke" target="blank"><i class="fab fa-github"></i></i></a></li>
+            <li><a href="https://www.instagram.com/imsanketbodke/" target="blank"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/sanket-bodake-995b5b205/" target="blank"><i class="fab fa-linkedin-in"></i></a></li>
+        </ul>
+    </div>
+
+      </div>
+
+    </div>
+
+    <p class="copyright">© 2023 All Rights Reserved</p>
+
+  </div>
+</body>
+</html>

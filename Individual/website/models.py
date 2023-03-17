@@ -12,8 +12,8 @@ class Register_Login(models.Model):
 class Transaction_History(models.Model):
     id1=models.IntegerField()
     category=models.CharField(max_length=100)
-    credit_amount=models.IntegerField()
-    debit_amount=models.IntegerField()
+    type_amount=models.CharField(max_length=100,default=None)
+    amount=models.IntegerField()
     balance=models.IntegerField()
 class Query(models.Model):
     query=models.CharField(max_length=100)

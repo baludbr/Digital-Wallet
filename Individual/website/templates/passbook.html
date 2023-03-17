@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <div id="content">
  <style> 
   table,td,td{
@@ -50,9 +49,9 @@ color:white;">
 <table style="width: 60%; border-collapse: collapse; font-family:montserrat;" >
         <tr style="background-color: #ccc;">
             <th>Transaction Category</th>
-            <th>Credit Amount</th>
-            <th>Debit Amount</th>
-            <th>Previous Balance</th>
+            <th>Type_Credit</th>
+            <th>Amount</th>
+            <th>Balance</th>
             <th>Update Transaction</th>
             <th>Delete Transaction</th>
         </tr>
@@ -60,8 +59,8 @@ color:white;">
             {%for i in all.values%}
               <tr>
               <td>{{i.category}}</td>
-              <td>{{i.credit_amount}}</td>
-              <td>{{i.debit_amount}}</td>
+              <td>{{i.type_amount}}</td>
+              <td>{{i.amount}}</td>
               <td>{{i.balance}}</td>
               <td style="text-align: center;"><a href="/"><i class="fas fa-edit">Update</i></a></td>
               <td style="text-align: center;"><a href="/"><i class="fas fa-trash-alt">delete</i></a></td>

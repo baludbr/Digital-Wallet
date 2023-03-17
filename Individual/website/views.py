@@ -11,10 +11,13 @@ import random
 from django.conf import settings
 from django.core.mail import send_mail
 def navbar(request):
-    xe=Register_Login.objects.get(id=id)
-    if 'session_id' in request.session and request.session['session_id']==xe.id:
-        return render(request,"navbar.html",{'x2':xe.role})
-    return render(request,'Sessiontimeout.html')
+    try:
+        xe=Register_Login.objects.get(id=id)
+        if 'session_id' in request.session and request.session['session_id']==xe.id:
+            return render(request,"navbar.html",{'x2':xe.role})
+        return render(request,'Sessiontimeout.html')
+    except:
+        return render(request,'Sessiontimeout.html')
 def Register(request):
     email=request.POST.get("email")
     r=Register_Login.objects.filter(email=email)
@@ -39,7 +42,15 @@ def Login(request):
             request.session.clear_expired() 
             x11=request.session['session_id']=d[0][0]
             x2=Register_Login.objects.get(id=d[0][0])
-            return render(request,"navbar.html",{'x':d[0][0],'x1':x11,'x2':x2})
+            x=Transaction_History.objects.filter(id1=d[0][0])
+            Total_credit=0
+            Total_debit=0
+            for i in x:
+                if i.type_amount=='debit':
+                    Total_debit=Total_debit+int(i.amount)
+                else:
+                    Total_credit=Total_credit+int(i.amount)
+            return render(request,'homepage.html',{'x':d[0][0],'y':Total_credit,'z':Total_debit,'w':x2.balance})
         else:
             return render(request,'Login.html' ,{'message':"your username or password is wrong"})
     return render(request,'Login.html')
@@ -50,7 +61,15 @@ def home(request):
         id=request.session['session_id']
         xe=Register_Login.objects.get(id=id)
         if 'session_id' in request.session and request.session['session_id']==xe.id:
-            return render(request,'Home.html',{'x':id})
+            x=Transaction_History.objects.filter(id1=id)
+            Total_credit=0
+            Total_debit=0
+            for i in x:
+                if i.type_amount=='debit':
+                    Total_debit=Total_debit+int(i.amount)
+                else:
+                    Total_credit=Total_credit+int(i.amount)
+            return render(request,'homepage.html',{'x':id,'y':Total_credit,'z':Total_debit,'w':xe.balance})
         return render(request,'Sessiontimeout.html')
     except :
         return render(request,'Sessiontimeout.html')
@@ -161,7 +180,7 @@ def insert(request):
         id=request.session['session_id']
         xe=Register_Login.objects.get(id=id)
         if 'session_id' in request.session  and request.session['session_id']==xe.id:
-            x1=Register_Login.objects.get(id=id);
+            x1=Register_Login.objects.get(id=id)
             return render(request,'insert.html',{'x':id,'x1':x1})
         return render(request,'Sessiontimeout.html')
     except :
@@ -175,16 +194,20 @@ def insertData(request):
             if request.method=="POST":
                 form=Transaction_History_Details(request.POST or None)
                 if form.is_valid:
-                    form.save()
                     x1=Register_Login.objects.get(id=idx)
-                    a=request.POST.get("credit_amount")
-                    b=request.POST.get("debit_amount")
+                    a=request.POST.get("category")
+                    s=request.POST.get("type_amount")
+                    b=request.POST.get("amount")
                     balance=request.POST.get("balance")
-                    x=int(balance)-int(b)+int(a)
-                    x1.balance=str(x)
+                    if(s=='credit'):
+                        x=int(balance)+int(b)
+                        x1.balance=str(x)
+                    else:
+                        x=int(balance)-int(b)
+                        x1.balance=str(x)
+                    form.save()
                     x1.save()
                     x2=Register_Login.objects.get(id=idx)
-                    print(a,b,balance)
                     return render(request,'submit.html',{'x':idx,'x11':x2})
             else:
                 return render(request,'insert.html',{})
@@ -192,6 +215,7 @@ def insertData(request):
     except :
         return render(request,'Sessiontimeout.html')
 def passbook(request):
+    try:
         id=request.session['session_id']
         xe=Register_Login.objects.get(id=id)
         if 'session_id' in request.session  and request.session['session_id']==xe.id:
@@ -200,11 +224,16 @@ def passbook(request):
             Total_credit=0
             Total_debit=0
             for i in x:
-                Total_debit=Total_debit+int(i.debit_amount)
-                Total_credit=Total_credit+int(i.credit_amount)
+                if i.type_amount=='debit':
+                    Total_debit=Total_debit+int(i.amount)
+                else:
+                    Total_credit=Total_credit+int(i.amount)
             return render(request,'Passbook.html',{'x':id,'all':x,'yy':y.balance,'t_d':Total_debit,'t_c':Total_credit})
         else:
             return render(request,'Sessiontimeout.html')
+    except:
+        return render(request,'Sessiontimeout.html')
+
 def submit(request):
     try:
         id=request.session['session_id']
@@ -229,28 +258,38 @@ def logout(request):
     except :
         return render(request,'Sessiontimeout.html')
 def users1(request):
-    id=request.session['session_id']
-    xe=Register_Login.objects.get(id=id)
-    if 'session_id' in request.session  and request.session['session_id']==xe.id:
+    try:
+        id=request.session['session_id']
         xe=Register_Login.objects.get(id=id)
-        x=Register_Login.objects.all
-        return render(request,'Users.html',{'x':id,'x1':x,'x2':xe})
-    else:
+        if 'session_id' in request.session  and request.session['session_id']==xe.id:
+            xe=Register_Login.objects.get(id=id)
+            x=Register_Login.objects.all
+            print(x)
+            return render(request,'Users.html',{'x':id,'x1':x,'x2':xe})
+        else:
+            return render(request,'Sessiontimeout.html')
+    except:
         return render(request,'Sessiontimeout.html')
 def trans(request):
-    id=request.session['session_id']
-    xe=Register_Login.objects.get(id=id)
-    if 'session_id' in request.session  and request.session['session_id']==xe.id:
-        x=Transaction_History.objects.all
-        return render(request,'Trans.html',{'x':id,'x1':x,'x2':xe})
-    else:
+    try:
+        id=request.session['session_id']
+        xe=Register_Login.objects.get(id=id)
+        if 'session_id' in request.session  and request.session['session_id']==xe.id:
+            x=Transaction_History.objects.all
+            return render(request,'Trans.html',{'x':id,'x1':x,'x2':xe})
+        else:
+            return render(request,'Sessiontimeout.html')
+    except:
         return render(request,'Sessiontimeout.html')
 def query1(request):
-    id=request.session['session_id']
-    xe=Register_Login.objects.get(id=id)
-    if 'session_id' in request.session  and request.session['session_id']==xe.id:
+    try:
+        id=request.session['session_id']
         xe=Register_Login.objects.get(id=id)
-        x=Query.objects.all
-        return render(request,'query_all.html',{'x':id,'x1':x,'x2':xe})
-    else:
+        if 'session_id' in request.session  and request.session['session_id']==xe.id:
+            xe=Register_Login.objects.get(id=id)
+            x=Query.objects.all
+            return render(request,'query_all.html',{'x':id,'x1':x,'x2':xe})
+        else:
+            return render(request,'Sessiontimeout.html')
+    except:
         return render(request,'Sessiontimeout.html')
