@@ -8,20 +8,21 @@
 </head>
 <body>
   {% include 'navbar.html'%}
+  <button onclick=window.location='/insert' class="editbutton"><i class="fas fa-plus"></i>&nbsp;Add Transaction</button>
 <div style="justify-content: space-around;padding: 20px;display: flex; flex-direction: row; flex-wrap: wrap;gap:25px ">
-   <!-- <div>
+   <div>
     <canvas id="myChart" width="400" height="400"></canvas>
     <h3 style="text-align: center;"><b>Title: Credit & Debit Transactions</b></h3>  </div>
-    -->
+   
     <div>{% if chart %}
         <img src="data:image/png;base64,{{chart|safe}}">
         
         {% endif %}</div>
-        <!-- <div>{% if chart1 %}
+        <div>{% if chart1 %}
             <img src="data:image/png;base64,{{chart|safe}}">
             
-            {% endif %}</div> -->
-    <!-- <div>    <canvas id="myChart1" width="400" height="400"></canvas>
+            {% endif %}</div>
+     <div>    <canvas id="myChart1" width="400" height="400"></canvas>
     <h3 style="text-align: center;"><b>Title: Credits Vs Debits</b></h3> 
    </div>
    <div>
@@ -30,7 +31,7 @@
    </div>
    <div>
     <canvas id="myChart3" width="400" height="400"></canvas>
-    <h3 style="text-align: center;"><b>Title: Debit  Vs Category</b></h3></div>  -->
+    <h3 style="text-align: center;"><b>Title: Debit  Vs Category</b></h3></div> 
 </div>
 </body> 
 </html>

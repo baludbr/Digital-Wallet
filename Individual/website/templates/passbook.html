@@ -9,65 +9,81 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <div id="content">
- <style> 
-  table,td,td{
-    border: 1px solid black;
-  }
-  .input {
-	margin: 8%;
-	width: 25%;
-	padding: 15px 20px;
-	margin: 8px 0;
-	box-sizing: border-box;
-	border: none;
-	outline: none;
-	color:black;
-    border-radius: 1px;
-	background-color: #fff;
-	border-bottom: 1px solid rgb(5, 5, 5);
-    opacity:.8;
+  <style>
+    .styled-table {
+    width:75%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px black;
+    }
+    .styled-table thead tr {
+    background-color: black;
+    color: #ffffff;
+    text-align: left;
+    }
+    .styled-table th,
+    .styled-table td {
+    padding: 12px 15px;
+    }
+    .styled-table tbody tr {
+    border-bottom: 1px solid black;
+    }
+
+    .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+    }
+
+    .styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid black;
+    }
+    .styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+    }
+    tr:nth-child(even) {
+          background-color: #ececec;
+        }
+
+.btn1 {
+   background-color: #90EE90;
+  border: 0;
+  padding: 5px;
+  height: 50%;
+  width: 50%;
 }
-  </style>
+.btn2{
+  background-color: #FFCCCB;
+  border: 0;
+  padding: 5px;
+  height: 60%;
+  width: 60%;
+}
+</style>
 </head>
 <body>
     {% include "Navbar.html" %}
     <center>
-    <i class="fa fa-search" aria-hidden="true"></i>
-<input class="input" id="myInput" type="text" placeholder="Search Your Transaction">
-
-<div class="creditscore" 
-style="width: fit-content;
-box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-float: right; 
-background-color:#43425D; 
-border-radius:15px;
-color:white;">
-
-<h4> &nbsp;&nbsp;Balance:- &nbsp;<i class='fas fa-dollar-sign' style='font-size:18px;color: lightgreen;' ></i>
-    {{yy}}&nbsp;&nbsp;</h4></div>
-    <br>
-<table style="width: 60%; border-collapse: collapse; font-family:montserrat;" >
-        <tr style="background-color: #ccc;">
-            <th>Transaction Category</th>
-            <th>Type_Credit</th>
-            <th>Amount</th>
-            <th>Balance</th>
-            <th>Update Transaction</th>
-            <th>Delete Transaction</th>
+      <table class="styled-table">
+        <thead>
+        <tr>
+         <th>Category</th>
+         <th>Type</th>
+         <th>Amount</th>
+         <th>Balance</th>
         </tr>
-        <tbody id="myTable">
-            {%for i in all.values%}
+        </thead>
+        <tbody>
+          {%for i in all.values%}
               <tr>
               <td>{{i.category}}</td>
               <td>{{i.type_amount}}</td>
               <td>{{i.amount}}</td>
               <td>{{i.balance}}</td>
-              <td style="text-align: center;"><a href="/"><i class="fas fa-edit">Update</i></a></td>
-              <td style="text-align: center;"><a href="/"><i class="fas fa-trash-alt">delete</i></a></td>
-              </tr>
-          {%endfor%}
-</tbody>
-</table>
+        </tr>
+        {%endfor%}
 <h6>Total Credited Amount:</h6>{{t_c}}
 <br/>
 <h6>Total Debited Amount:</h6>{{t_d}}

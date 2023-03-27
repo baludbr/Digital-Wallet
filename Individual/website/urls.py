@@ -6,6 +6,7 @@ urlpatterns = [
     path('register/',views.Register,name="register"),
     path('login/',views.Login,name="login"),
     path('homepage/', views.home, name='home'),
+    path('register/otplogin',views.otp_verification,name="otp"),
     path('transaction/', views.transaction, name='transaction'),
     path('finance/', views.finance, name='finance'),
     path('query/', views.query, name='query'),

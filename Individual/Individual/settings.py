@@ -151,7 +151,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'dwarampudibalajireddy@gmail.com'
-EMAIL_HOST_PASSWORD = 'ccqezdsxutzdublc'
+EMAIL_HOST_PASSWORD = 'pbqykbzqrpogettk'
 
 SESSION_COOKIE_AGE = 5000
 SESSION_EXPIRE_SECONDS = 5000
