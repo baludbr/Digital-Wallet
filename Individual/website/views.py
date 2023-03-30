@@ -11,6 +11,7 @@ import random
 from django.conf import settings
 from django.core.mail import send_mail
 import json
+from django.http import *
 def navbar(request):
     try:
         xe=Register_Login.objects.get(id=id)
@@ -117,17 +118,12 @@ def transaction(request):
         id=request.session['session_id']
         xe=Register_Login.objects.get(id=id)
         if 'session_id' in request.session  and request.session['session_id']==xe.id:
-            x=Transaction_History.objects.filter(id1=id)
-            r= []
-            k=[]
-            for i in x:
-                if i.category in r:
-                    continue
-                else:
-                    r.append((i.category).replace("'", "\""))
-            xx=json.dumps(r)
-            print(xx)
-            return render(request,'transaction.html',{'x':id,'r':xx})
+            xe=Transaction_History.objects.filter(id1=id).values('type_amount').annotate(balance=Sum('amount')).order_by('-type_amount')
+            xe1=Transaction_History.objects.filter(id1=id).values('category').annotate(balance=Sum('amount')).order_by('-category')
+            xe2=Transaction_History.objects.filter(id1=id).values('id1').annotate(balance=Sum('balance')).order_by('-id')
+            xe3=Transaction_History.objects.filter(id1=id).values('month_name').annotate(balance=Sum('amount')).order_by('-month_name')
+            print(xe3)
+            return render(request,'transaction.html',{'data':xe,'data1':xe1,'data2':xe2,'data3':xe3})
         return render(request,'Sessiontimeout.html')
 def finance(request):
         id=request.session['session_id']
@@ -166,7 +162,7 @@ def profile(request):
 def generateOTP():
     digits = "0123456789"
     OTP = ""
-    for i in range(6):
+    for i in range(5):
         OTP += digits[math.floor(random.random() * 10)]
     return OTP
 def edit(request):
@@ -322,9 +318,10 @@ def query1(request):
     except:
         return render(request,'Sessiontimeout.html')
 def otp_verification(request):
-    rr=request.POST.get('num')
+    rr=request.POST.get('ist')+""+request.POST.get('sec')+""+request.POST.get('third')+""+request.POST.get('fourth')+""+request.POST.get('fifth')
     if(rr==k1):
         form1.save()
+        
         return render(request,'login.html')
     else:
         return render(request,'otp_v.html')

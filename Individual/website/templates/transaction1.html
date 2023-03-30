@@ -15,15 +15,16 @@
     <h3 style="text-align: center;"><b>Title: Credit & Debit Transactions</b></h3>  </div>
    
     <div>{% if chart %}
-        <img src="data:image/png;base64,{{chart|safe}}">
+      data:image/png;base64,{{chart|safe}}
         
         {% endif %}</div>
         <div>{% if chart1 %}
-            <img src="data:image/png;base64,{{chart|safe}}">
+            <img src="data:image/png;.base64,{{chart|safe}}">
             
             {% endif %}</div>
-     <div>    <canvas id="myChart1" width="400" height="400"></canvas>
-    <h3 style="text-align: center;"><b>Title: Credits Vs Debits</b></h3> 
+     <div>    
+      <canvas id="myChart1" width="400" height="400"></canvas>
+      <h3 style="text-align: center;"><b>Title: Credits Vs Debits</b></h3> 
    </div>
    <div>
     <canvas id="myChart2" width="400" height="400"></canvas>
@@ -33,5 +34,6 @@
     <canvas id="myChart3" width="400" height="400"></canvas>
     <h3 style="text-align: center;"><b>Title: Debit  Vs Category</b></h3></div> 
 </div>
+{% include 'footer1.html'%}
 </body> 
 </html>
