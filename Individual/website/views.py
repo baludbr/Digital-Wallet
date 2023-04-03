@@ -11,6 +11,7 @@ import random
 from django.conf import settings
 from django.core.mail import send_mail
 import json
+from . import Security
 from django.http import *
 def navbar(request):
     try:
@@ -30,6 +31,7 @@ def Register(request):
     elif request.method=="POST":
         form1=Register_Details(request.POST or None)
         x=Register_Login.objects.all
+        print(x)
         if form1.is_valid:
             name="Balu"
             subject = 'welcome to BudgetBoss'
@@ -84,36 +86,6 @@ def home(request):
         return render(request,'Sessiontimeout.html')
     except :
         return render(request,'Sessiontimeout.html')
-def transaction1(request):
-        id=request.session['session_id']
-        transactions = Transaction_History.objects.filter(id1=id)
-        no_credit=[]
-        trans_cat_credit=[]
-        trans_cat_debit=[]   
-        no_debit=[]
-        for trans in transactions:
-            if trans.amount>0 and trans.category and trans.type_amount=="credit":
-                no_credit.append(int(trans.amount))
-                trans_cat_credit.append(str(trans.category))
-            elif trans.category in trans_cat_credit:  
-                ind = trans_cat_credit.index(trans.category)
-                no_credit[ind] = int(no_credit[ind] + trans.amount)
-            elif trans.amount>0 and trans.category and trans.type_amount=="debit":
-                no_debit.append(int(trans.amount))
-                trans_cat_debit.append(str(trans.category))
-            elif trans.category in trans_cat_debit:
-                ind = trans_cat_debit.index(trans.category)
-                no_debit[ind] = int(no_debit[ind] + trans.amount)
-        print(no_credit)
-        print(no_debit)           
-        p1=len(no_credit)
-        p2=len(no_debit)
-        trans_count=[p1,p2]
-        p11= [p for p in range(1,len(no_credit)+1)]
-        p22= [p21 for p21 in range(1,len(no_debit)+1)]
-        chart=utils.get_plot(p11,no_credit,p22,no_debit)
-        return render(request, "transaction1.html",{'credit':no_credit,'debit':no_debit,'trans_count':trans_count,'trans_cat_credit':trans_cat_credit,'trans_cat_debit':trans_cat_debit,'chart':chart})
-
 def transaction(request):
         id=request.session['session_id']
         xe=Register_Login.objects.get(id=id)
@@ -321,7 +293,6 @@ def otp_verification(request):
     rr=request.POST.get('ist')+""+request.POST.get('sec')+""+request.POST.get('third')+""+request.POST.get('fourth')+""+request.POST.get('fifth')
     if(rr==k1):
         form1.save()
-        
         return render(request,'login.html')
     else:
         return render(request,'otp_v.html')
