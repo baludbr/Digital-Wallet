@@ -61,12 +61,77 @@
   height: 60%;
   width: 60%;
 }
+.dashboard-overview {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-overview-item {
+            width: 100px;
+            flex-basis: 30%;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .dashboard-overview-item-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-overview-item-value {
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .dashboard-overview-item-value1 {
+            font-size: 15px;
+            color: green;
+            font-weight: bold;
+        }
+        .dashboard-overview-item-value2{
+            font-size: 15px;
+            color:red;
+            font-weight: bold;
+        }
+        .combutton {
+          padding: 10px 30px;
+	color: white;
+	background-color: black;
+	border: 5px solid transparent;
+	transition: .2s ease;
+	border-radius: 50px;
+}
+
+.combutton:hover {
+	color: black;
+	background-color: white;
+	transform: scale(1.1);
+	border: 5px solid black;
+}
+
 </style>
 </head>
 <body>
     {% include "Navbar.html" %}
     <center>
-      <table class="styled-table">
+      <div class="dashboard-overview">
+        <div class="dashboard-overview-item">
+            <div class="dashboard-overview-item-title"><b>Balance</b></div>
+            <div class="dashboard-overview-item-value">Rs {{yy}}</div>
+        </div>
+        <div class="dashboard-overview-item">
+            <div class="dashboard-overview-item-title"><b>Total Credit</b> </div>
+            <div class="dashboard-overview-item-value1">Rs {{t_c}}</div>
+        </div>
+        <div class="dashboard-overview-item">
+            <div class="dashboard-overview-item-title"><b>Total Debit</b></div>
+            <div class="dashboard-overview-item-value2">Rs {{t_d}}</div>
+        </div>
+    </div>
+      <div id="pd">
+      <table class="styled-table" >
         <thead>
         <tr>
          <th>Category</th>
@@ -84,14 +149,13 @@
               <td>{{i.balance}}</td>
         </tr>
         {%endfor%}
-<h6>Total Credited Amount:</h6>{{t_c}}
+        </div>
 <br/>
-<h6>Total Debited Amount:</h6>{{t_d}}
 </div>
 <br>
-<span style="text-align:center; padding-left:42%;">
-<button class="combutton" onclick="printDiv('content')">Print <i class="fa fa-print" aria-hidden="true"></i></button>
-</span>
+<div>
+<button class="combutton" onclick="printDiv('pd')">Print <i class="fa fa-print" aria-hidden="true"></i></button>
+</div>
 <script>
     $(document).ready(function(){
       $("#myInput").on("keyup", function() {
@@ -106,12 +170,13 @@
        var originalContents = document.body.innerHTML;
   
        document.body.innerHTML = printContents;
-  
+       setTimeout(function(){mywindow.print();},1000);
        window.print();
   
        document.body.innerHTML = originalContents;
   }
   </script>
+      
   <!-- {% include 'footer1.html'%} -->
 </center>
 </body>

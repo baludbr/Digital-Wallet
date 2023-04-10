@@ -4,7 +4,6 @@
 <style>
     #outer{
     text-align:center;
-    size:100%
     }
     #o2{
     text-align:center;
@@ -15,15 +14,19 @@
 </style>
 <body>
 {%include "navbar.html"%}
-<!-- <div class="inner"><canvas id="myChart1" style="width:100%;max-width:600px"></canvas></div> -->
-<center>
+<div id="outer">
+<div class="inner"><canvas id="myChart1" style="width:100%;max-width:600px"></canvas></div>
 <div class="inner"><canvas id="myChart2" style="width:100%;max-width:600px"></canvas></div>
+</div>
+<div id="o2" style="margin-top:50px;">
 <div class="inner"><canvas id="myChart4" style="width:100%;max-width:600px"></canvas></div>
-<div class="outer"><canvas id="myChart3" style="width:100%;max-width:600px"></canvas></div>
-</center>
+    <div class="inner"><canvas id="myChart3" style="width:100%;max-width:600px"></canvas></div>
+
+</div>
+{%include "footer1.html"%}
 <script>
-var xValues =[{% for i in data1 %}'{{i.category}}',{%endfor%}];
-var yValues =[{% for i in data1 %}'{{i.balance}}',{%endfor%}];
+var xValues = ["Loans", "Insurance", "Savings", "Spendings", "BillDues"];
+var yValues = [55, 49, 44, 24, 15];
 var barColors = [
   "#b91d47",
   "#00aba9",
@@ -31,8 +34,8 @@ var barColors = [
   "#e8c3b9",
   "#1e7145"
 ];
-var x1Values =[{% for i in data1 %}'{{i.balance}}',{%endfor%}]
-var y1Values = 
+var x1Values = [50,60,70,80,90,100,110,120,130,140,150];
+var y1Values = [7,8,8,9,9,9,10,11,14,14,15];
 new Chart("myChart1", {
   type: "line",
   data: {
@@ -72,9 +75,8 @@ new Chart("myChart2", {
     }
   }
 });
-
-var x3Values =[{% for i in data %}'{{i.type_amount}}',{%endfor%}];
-var y3Values =[{% for i in data %}'{{i.balance}}',{%endfor%}];
+var x3Values = ["Fashion", "Food", "Education", "Insurance", "Others"];
+var y3Values = [55, 49, 44, 24, 15];
 var barColors3 = [
   "#b91d47",
   "#00aba9",
@@ -99,8 +101,8 @@ new Chart("myChart3", {
     }
   }
 });
-var x4Values = [{% for i in data3 %}'{{i.month_name}}',{%endfor%}];
-var y4Values = [{% for i in data3 %}'{{i.balance}}',{%endfor%}];
+var x4Values = ["January", "Febraury", "March", "April", "May"];
+var y4Values = [55, 49, 44, 24, 15];
 var barColors = ["red", "green","blue","orange","brown"];
 
 new Chart("myChart4", {
@@ -121,6 +123,5 @@ new Chart("myChart4", {
   }
 });
 </script>
-{% include 'footer1.html'%}
 </body>
 </html>

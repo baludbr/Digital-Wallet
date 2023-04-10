@@ -24,6 +24,8 @@ def Register(request):
     global k1
     global form1
     email=request.POST.get("email")
+    balance=request.POST.get("balance")
+    age=request.POST.get("age")
     r=Register_Login.objects.filter(email=email)
     if r:
         return render(request,'Register.html',{'m':"Email Already Found!!Try with another Id"})
@@ -32,10 +34,10 @@ def Register(request):
         x=Register_Login.objects.all
         if form1.is_valid:
             name="Balu"
-            subject = 'welcome to BudgetBoss'
+            subject = 'welcome to Digital Wallet'
             k1=generateOTP()
             print(k1)
-            message ='Hi, thank you for registering in BudgetBoss.Your otp is '+k1
+            message ='Hi, thank you for registering in Digital Wallet.\nPlease you the following OTP to verify your account\n OTP: '+k1
             email_from = settings.EMAIL_HOST_USER
             recipient_list =email
             send_mail(subject, message, email_from, [recipient_list],fail_silently=False)
@@ -61,7 +63,7 @@ def Login(request):
                     Total_debit=Total_debit+int(i.amount)
                 else:
                     Total_credit=Total_credit+int(i.amount)
-            return render(request,'homepage.html',{'x':d[0][0],'y':Total_credit,'z':Total_debit,'w':x2.balance,'x2':x2})
+            return render(request,'homepage.html',{'x':d[0][0],'y':Total_credit,'z':Total_debit,'w':x2.balance,'x2':x2,'x1':x2})
         else:
             return render(request,'Login.html' ,{'message':"Invalid Credentials"})
     return render(request,'Login.html')
@@ -80,39 +82,16 @@ def home(request):
                     Total_debit=Total_debit+int(i.amount)
                 else:
                     Total_credit=Total_credit+int(i.amount)
-            return render(request,'homepage.html',{'x':id,'y':Total_credit,'z':Total_debit,'w':xe.balance})
+            return render(request,'homepage.html',{'x':id,'y':Total_credit,'z':Total_debit,'w':xe.balance,'x1':xe})
         return render(request,'Sessiontimeout.html')
     except :
         return render(request,'Sessiontimeout.html')
 def transaction1(request):
-        id=request.session['session_id']
-        transactions = Transaction_History.objects.filter(id1=id)
-        no_credit=[]
-        trans_cat_credit=[]
-        trans_cat_debit=[]   
-        no_debit=[]
-        for trans in transactions:
-            if trans.amount>0 and trans.category and trans.type_amount=="credit":
-                no_credit.append(int(trans.amount))
-                trans_cat_credit.append(str(trans.category))
-            elif trans.category in trans_cat_credit:  
-                ind = trans_cat_credit.index(trans.category)
-                no_credit[ind] = int(no_credit[ind] + trans.amount)
-            elif trans.amount>0 and trans.category and trans.type_amount=="debit":
-                no_debit.append(int(trans.amount))
-                trans_cat_debit.append(str(trans.category))
-            elif trans.category in trans_cat_debit:
-                ind = trans_cat_debit.index(trans.category)
-                no_debit[ind] = int(no_debit[ind] + trans.amount)
-        print(no_credit)
-        print(no_debit)           
-        p1=len(no_credit)
-        p2=len(no_debit)
-        trans_count=[p1,p2]
-        p11= [p for p in range(1,len(no_credit)+1)]
-        p22= [p21 for p21 in range(1,len(no_debit)+1)]
-        chart=utils.get_plot(p11,no_credit,p22,no_debit)
-        return render(request, "transaction1.html",{'credit':no_credit,'debit':no_debit,'trans_count':trans_count,'trans_cat_credit':trans_cat_credit,'trans_cat_debit':trans_cat_debit,'chart':chart})
+        xe=request.session['session_id']
+        if 'session_id' in request.session  and request.session['session_id']==xe:
+         return render(request,'transaction2.html')
+        else:
+            return render(request,'Sessiontimeout.html')
 
 def transaction(request):
         id=request.session['session_id']
@@ -262,7 +241,7 @@ def submit(request):
                 if form.is_valid:
                     form.save()
                     subject = 'Query Confirmation'
-                    message ='Hello User,We recieved your query.We will work on it.Thank You!!'
+                    message ='Hello User,We recieved your query and We will look into it.Thank You!!'
                     email_from = settings.EMAIL_HOST_USER
                     recipient_list =email
                     send_mail(subject, message, email_from, [recipient_list],fail_silently=False)
@@ -325,5 +304,4 @@ def otp_verification(request):
         return render(request,'login.html')
     else:
         return render(request,'otp_v.html')
-
 

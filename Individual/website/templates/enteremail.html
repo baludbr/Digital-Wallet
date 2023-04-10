@@ -16,7 +16,7 @@
 
   /* SIZES */
   --max-width: 800px;
-  --max-height: 500px;
+  --max-height: 300px;
 
   font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -25,7 +25,6 @@
 
 body {
   align-items: center;
-  background-color: rgb(23, 33, 29);
   display: grid;
   height: 100vh;
   place-items: center;
@@ -191,23 +190,18 @@ body {
     <div class="container right-panel-active">
       <!-- Sign Up -->
       <div class="container__form container--signup">
-        <form action="{%url 'register'%}" class="form" id="form" method="POST" >
+        <form action="#" class="form" id="form" method="POST" >
           {% csrf_token %}
-                    <h2 class="form__title">Sign Up</h2>
-                    {{m}}
-          <input class="input" type="text" name="name" placeholder="Name" required>
-          <input class="input" type="email" name="email" placeholder="Email" required>
-           <input class="input" type="text" name="password" placeholder="Password" required>
-          <input class="input" type="text" name="age"  placeholder="Age" required>
-           <input class="input" type="integer" name="balance"  placeholder="Balance" required>
-          <button class="btn">Sign Up</button>
+                    <h2 class="form__title">Enter your Email</h2>
+           <input class="input" type="email" name="email" placeholder="Enter email id" required>
+          <button class="btn">Send OTP</button>
         </form>
       </div>
       <!-- Overlay -->
       <div class="container__overlay">
         <div class="overlay">
           <div class="overlay__panel overlay--left">
-            <img class="logo"  src="https://images.unsplash.com/photo-1587725835427-a9ff8e559dc3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGNvZmZlZSUyMHdvcmt8ZW58MHx8MHx8&w=1000&q=80"  height="100%" />
+            <img class="logo"  src="https://wallpapers.com/images/hd/mail-computer-laptop-sending-email-g4uwgksj1tp9tmvq.jpg"  height="300px"/>
           </div>
         </div>
       </div>

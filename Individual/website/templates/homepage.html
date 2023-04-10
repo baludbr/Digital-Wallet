@@ -5,13 +5,158 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Style the dashboard header */
+        .dashboard-header {
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #30475e;
+            color: #fff;
+            border-radius: 5px;
+        }
+        .dashboard-header2 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #30475e;
+            color: #fff;
+            border-radius: 5px;
+            width: 150px;
+        }
+
+        .dashboard-header-title {
+            font-size: 24px;
+        }
+
+        .dashboard-header-actions a {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #f9a826;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .dashboard-header-actions a:hover {
+            background-color: #e88d1e;
+        }
+
+        /* Style the dashboard overview */
+        .dashboard-overview {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-overview-item {
+            flex-basis: 30%;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .dashboard-overview-item-title {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-overview-item-value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .dashboard-overview-item-value1 {
+            font-size: 20px;
+            color: green;
+            font-weight: bold;
+        }
+        .dashboard-overview-item-value2{
+            font-size: 20px;
+            color:red;
+            font-weight: bold;
+        }
+        .topimage{
+  background: linear-gradient(212.38deg, rgba(242, 57, 127, 0.7) 0%, rgba(175, 70, 189, 0.71) 100%),url(https://i0.wp.com/kaerusbio.com/wp-content/uploads/2022/07/kaerus_homepage-hero_bkgd-e1658171139410.png?resize=1182%2C606&ssl=1);
+  color: #fff;
+  position: relative;
+  height:150px;
+}
+
+.topimage .tpimg-text{
+  height: 100%;
+  position:relative;
+  padding-top: 45px;
+}
+.tpimg-text h2{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+}
+.tpimg-text h5{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.tpimg .tpimg-inductor{
+  position: absolute;
+  width: 70px;
+  height: 50px;
+  background: #fff0;
+  bottom: 70px;
+}
+    </style>
 </head>
 <body>
     {% include 'navbar.html' %}
-    {{y}}
-    {{z}}
-    {{w}}
-    <div style="height:70vh"></div>
+    <div class="topimage">
+        <div class="tpimg-text">
+          <h2>The easiest way to manage personal finances</h2>
+          <h5>Track your spending habits and take control of your finances.</h5>
+        </div>
+      </div>
+      
+    <div class="dashboard-header">
+        <div class="dashboard-header-title"><i>Welcome  {{x1.name}}, </i> </div>
+        <div class="dashboard-header-actions">
+        </div>
+    </div>
+    <div class="dashboard-overview">
+        <div class="dashboard-overview-item">
+            <div class="dashboard-overview-item-title"><b>Balance</b></div>
+            <div class="dashboard-overview-item-value">Rs {{w}}</div>
+        </div>
+        <div class="dashboard-overview-item">
+            <div class="dashboard-overview-item-title"><b>Total Credit</b> </div>
+            <div class="dashboard-overview-item-value1">Rs {{y}}</div>
+        </div>
+        <div class="dashboard-overview-item">
+            <div class="dashboard-overview-item-title"><b>Total Debit</b></div>
+            <div class="dashboard-overview-item-value2">Rs {{z}}</div>
+        </div>
+    </div>
+    <img src="https://freepngimg.com/thumb/online_banking/165363-banking-hd-image-free.png"/>
     {% include 'footer1.html'%}
 </body>
 </html>
