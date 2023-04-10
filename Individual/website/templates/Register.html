@@ -185,6 +185,10 @@ body {
 .btn a:hover{
   color: #fff;
 }
+.alert1
+{
+  color: red;
+}
     </style>
 </head>
 <body>
@@ -194,7 +198,7 @@ body {
         <form action="{%url 'register'%}" class="form" id="form" method="POST" >
           {% csrf_token %}
                     <h2 class="form__title">Sign Up</h2>
-                    {{m}}
+                   <div class="alert1"> {{m}}</div>
           <input class="input" type="text" name="name" placeholder="Name" required>
           <input class="input" type="email" name="email" placeholder="Email" required>
            <input class="input" type="text" name="password" placeholder="Password" required>
@@ -202,6 +206,7 @@ body {
            <input class="input" type="integer" name="balance"  placeholder="Balance" required>
           <button class="btn">Sign Up</button>
         </form>
+        <a href="forgotpassword">Forgot </a>
       </div>
       <!-- Overlay -->
       <div class="container__overlay">

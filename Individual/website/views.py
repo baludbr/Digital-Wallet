@@ -11,6 +11,7 @@ import random
 from django.conf import settings
 from django.core.mail import send_mail
 import json
+from . import Security
 from django.http import *
 def navbar(request):
     try:
@@ -32,6 +33,7 @@ def Register(request):
     elif request.method=="POST":
         form1=Register_Details(request.POST or None)
         x=Register_Login.objects.all
+        print(x)
         if form1.is_valid:
             name="Balu"
             subject = 'welcome to Digital Wallet'
@@ -86,6 +88,7 @@ def home(request):
         return render(request,'Sessiontimeout.html')
     except :
         return render(request,'Sessiontimeout.html')
+<<<<<<< HEAD
 def transaction1(request):
         xe=request.session['session_id']
         if 'session_id' in request.session  and request.session['session_id']==xe:
@@ -93,6 +96,8 @@ def transaction1(request):
         else:
             return render(request,'Sessiontimeout.html')
 
+=======
+>>>>>>> 6f72733c6ffe19ac7db18e0254d3a1d26126cd5b
 def transaction(request):
         id=request.session['session_id']
         xe=Register_Login.objects.get(id=id)
@@ -300,7 +305,6 @@ def otp_verification(request):
     rr=request.POST.get('ist')+""+request.POST.get('sec')+""+request.POST.get('third')+""+request.POST.get('fourth')+""+request.POST.get('fifth')
     if(rr==k1):
         form1.save()
-        
         return render(request,'login.html')
     else:
         return render(request,'otp_v.html')
