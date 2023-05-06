@@ -13,7 +13,7 @@
         }
 
         form {
-            max-width: 500px;
+            width: 500px;
             margin: 0 auto;
             padding: 20px;
             background-color: #fff;
@@ -29,11 +29,13 @@
             border: none;
             border-radius: 5px;
             box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+            font-size: x-large;
         }
 
         input[type="text"]:focus, input[type="integer"],select:focus {
             outline: none;
             box-shadow: inset 0 0 5px rgba(0,0,0,0.4);
+            font-size: x-large;
         }
 
         input[type="submit"] {
@@ -45,10 +47,12 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: x-large;
         }
 
         input[type="submit"]:hover {
             background-color: #3e8e41;
+            font-size: x-large;
         }
     </style>
 </head>
@@ -64,10 +68,13 @@
         <br/>
         <input type="integer" placeholder="debit" name="debit_amount">
         <br/> -->
+         <input type="hidden" placeholder="id1" value={{x1.id}} name="id1">
+        <br/>
         <select name="category">
             <option value="food">Food</option>
-            <option value="fashion">fashion</option>
-            <option value="parties">parties</option>
+            <option value="fashion">Fashion</option>
+            <option value="parties">Parties</option>
+            <option value="others">Others</option>
           </select>
           <br/>
           <select name="type_amount">
@@ -75,7 +82,7 @@
             <option value="debit">Debit</option>
           </select>
           <br/>
-          <input type="integer" placeholder="amount" name="amount">
+          <input type="integer" placeholder="Enter Amount" name="amount">
         <br/>
         <input type="hidden" placeholder="balance" name="balance" value={{x1.balance}} readonly>
         <br/>

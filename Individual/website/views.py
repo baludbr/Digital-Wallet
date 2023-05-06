@@ -27,7 +27,7 @@ def Register(request):
     name=request.POST.get("name")
     email=request.POST.get("email")
     balance=request.POST.get("balance")
-    age=request.POST.get("age")
+    age=int(request.POST.get("age"))
     r=Register_Login.objects.filter(email=email)
     if r:
         return render(request,'Register.html',{'m':"Email Already Found!!Try with another Id"})
@@ -103,6 +103,7 @@ def transaction1(request):
         else:
             return render(request,'Sessiontimeout.html')
 def transaction(request):
+    try:
         id=request.session['session_id']
         xe=Register_Login.objects.get(id=id)
         if 'session_id' in request.session  and request.session['session_id']==xe.id:
@@ -113,11 +114,16 @@ def transaction(request):
             print(xe3)
             return render(request,'transaction.html',{'data':xe,'data1':xe1,'data2':xe2,'data3':xe3})
         return render(request,'Sessiontimeout.html')
+    except:
+        return render(request,'Sessiontimeout.html')
 def finance(request):
+    try:
         id=request.session['session_id']
         xe=Register_Login.objects.get(id=id)
         if 'session_id' in request.session  and request.session['session_id']==xe.id:
             return render(request,'finance.html',{'x':id})
+        return render(request,'Sessiontimeout.html')
+    except:
         return render(request,'Sessiontimeout.html')
 def query(request):
     try:
@@ -374,4 +380,6 @@ def reset_pass(request):
             x.password=r1
             x.save()
             return render(request,"Login.html",)
+    else:
+        return render(request,"resetpassword.html",{"mess":"Email NotFound"})
 
