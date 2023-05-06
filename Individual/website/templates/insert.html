@@ -54,9 +54,9 @@
 </head>
 <body>
     {%include "navbar.html" %}
-    <form method="POST" action="insertid/" onsubmit="return validateForm()">
+    <form method="POST" action="/insertid/" onsubmit="return validateForm()">
+        {{mess}}
         {% csrf_token %}
-        <input type="text" placeholder="id" name="id1" value={{x1.id}} readonly>
         <br/>
         <!-- <input type="text" placeholder="category" name="category">
         <br/> -->
@@ -77,7 +77,7 @@
           <br/>
           <input type="integer" placeholder="amount" name="amount">
         <br/>
-        <input type="integer" placeholder="balance" name="balance" value={{x1.balance}} readonly>
+        <input type="hidden" placeholder="balance" name="balance" value={{x1.balance}} readonly>
         <br/>
         <input type="submit" value="Insert!!">
     </form>

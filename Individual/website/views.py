@@ -24,6 +24,7 @@ def navbar(request):
 def Register(request):
     global k1
     global form1
+    name=request.POST.get("name")
     email=request.POST.get("email")
     balance=request.POST.get("balance")
     age=request.POST.get("age")
@@ -31,6 +32,13 @@ def Register(request):
     if r:
         return render(request,'Register.html',{'m':"Email Already Found!!Try with another Id"})
     elif request.method=="POST":
+        res = name != '' and all(chr.isalpha() or chr.isspace() for chr in name)
+        if str(res)!="True":
+            return render(request,"Register.html",{"m":"Invalid Input. Only Alphabets"})
+        elif((age)<10 or (age)>100):
+            return render(request, "Register.html", {"m":"Age should be in between 10 and 100 to register"})
+        elif(int(balance)<0):
+                return render(request,"Register.html",{"m":"Balance should not be negative"})
         form1=Register_Details(request.POST or None)
         x=Register_Login.objects.all
         print(x)
@@ -88,16 +96,12 @@ def home(request):
         return render(request,'Sessiontimeout.html')
     except :
         return render(request,'Sessiontimeout.html')
-<<<<<<< HEAD
 def transaction1(request):
         xe=request.session['session_id']
         if 'session_id' in request.session  and request.session['session_id']==xe:
          return render(request,'transaction2.html')
         else:
             return render(request,'Sessiontimeout.html')
-
-=======
->>>>>>> 6f72733c6ffe19ac7db18e0254d3a1d26126cd5b
 def transaction(request):
         id=request.session['session_id']
         xe=Register_Login.objects.get(id=id)
@@ -186,8 +190,33 @@ def insert(request):
         return render(request,'Sessiontimeout.html')
     except :
         return render(request,'Sessiontimeout.html')
+# def insertData(request):
+#         idx=request.session.get('session_id')
+#         xe=Register_Login.objects.get(id=idx)
+#         print(idx)
+#         if 'session_id' in request.session  and request.session['session_id']==xe.id:
+#             if request.method=="POST":
+#                 form=Transaction_History_Details(request.POST or None)
+#                 if form.is_valid:
+#                     x1=Register_Login.objects.get(id=idx)
+#                     a=request.POST.get("category")
+#                     s=request.POST.get("type_amount")
+#                     b=request.POST.get("amount")
+#                     balance=x1.balance
+#                     if(s=='credit'):
+#                         x=int(balance)+int(b)
+#                         x1.balance=str(x)
+#                     else:
+#                         x=int(balance)-int(b)
+#                         x1.balance=str(x)
+#                     form.save()
+#                     x1.save()
+#                     x2=Register_Login.objects.get(id=idx)
+#                     return render(request,'submit.html',{'x':idx,'x11':x2})
+#             else:
+#                 return render(request,'insert.html',{})
+#         return render(request,'Sessiontimeout.html')
 def insertData(request):
-    try:
         idx=request.session.get('session_id')
         xe=Register_Login.objects.get(id=idx)
         print(idx)
@@ -198,8 +227,13 @@ def insertData(request):
                     x1=Register_Login.objects.get(id=idx)
                     a=request.POST.get("category")
                     s=request.POST.get("type_amount")
-                    b=request.POST.get("amount")
-                    balance=request.POST.get("balance")
+                    b=int(request.POST.get("amount"))
+                    balance=x1.balance
+                    print(a,s,b,balance)
+                    if int(b)<0:
+                        return render(request,"insert.html",{'mess':'Amount must greater than 0'})
+                    if int(xe.balance)<int(b) and s=='debit':
+                        return render(request,"insert.html",{'mess':'Amount is greater than balance'})
                     if(s=='credit'):
                         x=int(balance)+int(b)
                         x1.balance=str(x)
@@ -212,8 +246,6 @@ def insertData(request):
                     return render(request,'submit.html',{'x':idx,'x11':x2})
             else:
                 return render(request,'insert.html',{})
-        return render(request,'Sessiontimeout.html')
-    except :
         return render(request,'Sessiontimeout.html')
 def passbook(request):
     try:
@@ -308,4 +340,38 @@ def otp_verification(request):
         return render(request,'login.html')
     else:
         return render(request,'otp_v.html')
+def forgotpassword_emailenter(request):
+    return render(request,"enteremail.html")
+def forgotpassword_otp(request):
+    global k2
+    x=request.POST['email']
+    request.session['otp_email']=x
+    subject = 'Password Reset Request'
+    k2=generateOTP()
+    print(k2)
+    message = 'Hi,Your otp for changing the password is'+k2
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [x, ]
+    send_mail(subject, message, email_from, recipient_list,fail_silently=False)
+    return render(request,"otp_v1.html")
+def otp_verification1(request):
+    rr=request.POST.get('ist')+""+request.POST.get('sec')+""+request.POST.get('third')+""+request.POST.get('fourth')+""+request.POST.get('fifth')
+    print(rr,k2)
+    if(rr==k2):
+        return render(request,'resetpassword.html')
+    else:
+        return render(request,'otp_v1.html')
+def reset_pass(request):
+    rdx=request.session['otp_email']
+    x1=Register_Login.objects.filter(email=rdx).values()
+    if x1:
+        x=Register_Login.objects.get(email=rdx)
+        r1=request.POST['password']
+        r2=request.POST['re-enter']
+        if r1!=r2:
+            return render(request,"resetpassword.html",{"mess":"Not matching"})
+        else:
+            x.password=r1
+            x.save()
+            return render(request,"Login.html",)
 
