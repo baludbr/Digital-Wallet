@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_env
+load_env()
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-j(9%l_lafgvlng@d^lvq9w=6_*jxb+n6juex1bii9b63b&ma(o"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -72,25 +75,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "Individual.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'PFSD_IN', 
-#         'USER': 'postgres', 
-#         'PASSWORD': 'Baludbr@14',
-#         'HOST': 'localhost', 
-#         'PORT': '5432',
-#     }
-# }
+}
 DATABASES = {
     'default':
     {
@@ -98,9 +83,9 @@ DATABASES = {
         'NAME':'INDVIDUAL',
         "CLIENT":
         {
-            'host':'mongodb+srv://balaji:balu@cluster0.sigvzag.mongodb.net/?retryWrites=true&w=majority',
-            'username':'balaji',
-            'password':'balu',
+            'host':os.getenv("DATABASE_URL"),
+            'username':os.getenv("DB_USER"),
+            'password':os.getenv("DB_PASSWORD"),
 
         }
     }
@@ -150,8 +135,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'dwarampudibalajireddy@gmail.com'
-EMAIL_HOST_PASSWORD = 'pbqykbzqrpogettk'
+EMAIL_HOST_USER = os.getenv("EMAIL"),
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_KEY"),
 
 SESSION_COOKIE_AGE = 5000
 SESSION_EXPIRE_SECONDS = 5000
